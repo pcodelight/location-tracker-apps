@@ -14,14 +14,17 @@ class API {
 
         val instance: Retrofit
             get() {
-                val token = AuthHelper.instance.getAuthToken()
+                if (AuthHelper.instance.isHasAuthToken() && AuthHelper.instance.isAuthExpired()) {
+                    AuthHelper.instance.refreshAuthToken()
+                }
 
+                val token = AuthHelper.instance.getAuthToken()
                 val builder = OkHttpClient.Builder()
                     .connectTimeout(20, TimeUnit.SECONDS)
                     .writeTimeout(20, TimeUnit.SECONDS)
                     .readTimeout(20, TimeUnit.SECONDS)
 
-                if (token?.isNotBlank() == true) {
+                if (AuthHelper.instance.isHasAuthToken()) {
                     builder.addInterceptor(object: Interceptor {
                         override fun intercept(chain: Interceptor.Chain): Response {
                             val request = chain.request()

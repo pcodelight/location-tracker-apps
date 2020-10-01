@@ -20,7 +20,8 @@ class LoginScreen : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
-        if (AuthHelper.instance.getAuthToken()?.isNotBlank() == true) {
+        val loginFlag = intent.getLongExtra(LOGIN_FLAG, 0)
+        if (loginFlag != EXPIRED_TOKEN && AuthHelper.instance.getAuthToken()?.isNotBlank() == true) {
             gotoDashboardScreen()
             finish()
         }
@@ -85,5 +86,10 @@ class LoginScreen : AppCompatActivity() {
 
         etPass.addTextChangedListener(btnLoginEnabler)
         etUser.addTextChangedListener(btnLoginEnabler)
+    }
+
+    companion object {
+        const val LOGIN_FLAG = "login_flag"
+        const val EXPIRED_TOKEN = 1L
     }
 }
