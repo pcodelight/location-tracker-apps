@@ -25,13 +25,7 @@ class LocationListSection : Fragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        rvLocations.layoutManager = LinearLayoutManager(
-            requireContext(),
-            LinearLayoutManager.VERTICAL,
-            false
-        )
-        rvLocations.adapter = adapter
+        initView()
 
         viewModel = ViewModelFactory.getViewModel(DashboardViewModel::class.java.toString())
                 as DashboardViewModel
@@ -41,8 +35,19 @@ class LocationListSection : Fragment(
             locationRequestResult.observe(requireActivity(), locations)
             locationRequestError.observe(requireActivity(), error)
         }
-
         viewModel.getLocations()
+    }
+
+    private fun initView() {
+        rvLocations.layoutManager = LinearLayoutManager(
+            requireContext(),
+            LinearLayoutManager.VERTICAL,
+            false
+        )
+        rvLocations.adapter = adapter
+        swipeLayout.setOnRefreshListener {
+            viewModel.getLocations()
+        }
     }
 
     private val isLoading = Observer<Boolean> {
@@ -52,6 +57,7 @@ class LocationListSection : Fragment(
         } else {
             lvParent.visibility = View.GONE
             rvLocations.visibility = View.VISIBLE
+            swipeLayout.isRefreshing = false
         }
     }
 

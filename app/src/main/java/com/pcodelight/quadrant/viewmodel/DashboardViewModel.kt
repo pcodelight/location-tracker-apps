@@ -14,7 +14,7 @@ class DashboardViewModel(val repo: QLocRepository) : ViewModel() {
     /**
      * Home Section
      */
-    val isPermissionDenied = MutableLiveData<Boolean>()
+    val isGettingDeviceLocation = MutableLiveData<Boolean>()
     val locationData = MutableLiveData<Location?>()
     val isHomeLoading = MutableLiveData<Boolean>()
     val sendLocationError = MutableLiveData<String>()
@@ -42,57 +42,68 @@ class DashboardViewModel(val repo: QLocRepository) : ViewModel() {
             locationData.postValue(location)
         }
 
-        override fun onPermissionDenied() {
-            isPermissionDenied.postValue(true)
+        override fun onProcessTypeChange(isRetrieving: Boolean) {
+            isGettingDeviceLocation.postValue(isRetrieving)
         }
 
         override fun onSentLocationError(error: String) {
+            isHomeLoading.postValue(false)
             sendLocationError.postValue(error)
         }
 
         override fun onSentLocationSuccess(locationData: LocationData?) {
+            isHomeLoading.postValue(false)
             sendLocationResult.postValue(locationData)
         }
 
         override fun onMonthlyDataRequestSuccess(data: List<MonthlyData>) {
+            isMonthlyDataLoading.postValue(false)
             monthlyDataRequestResult.postValue(data)
         }
 
         override fun onMonthlyDataRequestError(error: String) {
+            isMonthlyDataLoading.postValue(false)
             monthlyDataRequestError.postValue(error)
         }
 
         override fun onLocationsRequestSuccess(data: List<LocationData>) {
+            isListLocationDataLoading.postValue(false)
             locationRequestResult.postValue(data)
         }
 
         override fun onLocationsRequestError(error: String) {
+            isListLocationDataLoading.postValue(false)
             locationRequestError.postValue(error)
         }
     }
 
     init {
-        repo.apply {
-            setDataCallback(qlDataListener)
-            startTrackingLocationData()
-        }
+        repo.setDataCallback(qlDataListener)
+        initTracking()
     }
 
     fun sendDataToServer() {
-        GlobalScope.launch {
-            if (locationData.value != null) {
+        if (locationData.value != null) {
+            isHomeLoading.postValue(true)
+            GlobalScope.launch {
                 repo.sendData()
-            } else {
-                repo.startTrackingLocationData()
             }
+        } else {
+            repo.startTrackingLocationData()
         }
     }
 
+    fun initTracking() {
+        repo.startTrackingLocationData()
+    }
+
     fun getLocations() {
+        isListLocationDataLoading.postValue(true)
         repo.getLocations()
     }
 
     fun getMonthlyData() {
+        isMonthlyDataLoading.postValue(true)
         repo.getMonthlyData()
     }
 }

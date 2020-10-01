@@ -53,7 +53,12 @@ class QLRetriever(
         override fun onStatusChanged(provider: String?, status: Int, extras: Bundle?) {}
         override fun onProviderEnabled(provider: String?) {}
         override fun onProviderDisabled(provider: String?) {}
-        override fun onProcessTypeChanged(processType: Int) {}
+        override fun onProcessTypeChanged(processType: Int) {
+            Log.d("QLRetriever", "Status : $processType")
+            quadrantDataListener?.onProcessTypeChange(
+                processType > ProcessType.ASKING_PERMISSIONS
+            )
+        }
         override fun onLocationFailed(type: Int) {}
     }
 
@@ -122,7 +127,6 @@ class QLRetriever(
 
     companion object {
         private lateinit var instance: QLRetriever
-
         fun init(activity: Activity, appContext: Context, authToken: String) {
             instance = QLRetriever(activity, appContext, authToken)
         }

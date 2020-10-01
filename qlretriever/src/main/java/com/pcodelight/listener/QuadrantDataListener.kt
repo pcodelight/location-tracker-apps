@@ -13,7 +13,7 @@ interface QuadrantDataListener {
     /**
      * Will be invoked if user reject permission request
      */
-    fun onPermissionDenied()
+    fun onProcessTypeChange(isRetrieving: Boolean)
 
     /**
      * Will be invoked if there is an error when sending data to server

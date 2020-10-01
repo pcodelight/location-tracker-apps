@@ -12,6 +12,7 @@ import com.pcodelight.model.MonthlyData
 import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.viewmodel.DashboardViewModel
 import com.pcodelight.quadrant.viewmodel.ViewModelFactory
+import kotlinx.android.synthetic.main.section_insight.*
 import kotlinx.android.synthetic.main.section_insight.view.*
 
 
@@ -43,16 +44,30 @@ class MonthlyDataSection : Fragment(
             monthlyDataRequestResult.observe(requireActivity(), monthlyData)
             monthlyDataRequestError.observe(requireActivity(), error)
             isMonthlyDataLoading.observe(requireActivity(), isLoading)
-
             getMonthlyData()
+        }
+
+        initView()
+    }
+
+    private fun initView() {
+        swipeLayoutChart.setOnRefreshListener {
+            viewModel.getMonthlyData()
         }
     }
 
     private val isLoading = Observer<Boolean> {
-        if (it) {
-
-        } else {
-
+        view?.apply {
+            if (it) {
+                lvChart.visibility = View.VISIBLE
+                tvTitle.visibility = View.GONE
+                chartView.visibility = View.GONE
+            } else {
+                lvChart.visibility = View.GONE
+                tvTitle.visibility = View.VISIBLE
+                chartView.visibility = View.VISIBLE
+                swipeLayoutChart.isRefreshing = false
+            }
         }
     }
 

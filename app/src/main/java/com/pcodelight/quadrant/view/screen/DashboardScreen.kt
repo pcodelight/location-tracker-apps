@@ -24,34 +24,7 @@ import kotlinx.coroutines.*
 import java.util.*
 
 class DashboardScreen : AppCompatActivity() {
-    /**
-     * parentViewModel - DashboardScreenViewModel
-     *
-     * section A, sendLocation
-     * section B, retrieveAllLocation
-     * section C, retrieveMonthlyLocation
-     *
-     * parent.withFragment(
-     *  A(onSendLocation()),
-     *  B(onRetrieveAllLocation()),
-     *  C(onRetrieveMonthlyData()
-     * )
-     *
-     * For Fragment A Case:
-     * if child call -> onSendLocation {
-     *  QLRepo.sendLocation()
-     * }
-     *
-     * after QLRepo return data -> parent.onSendLocationListener { isSuccess ->
-     *  viewModelA.locationData(data)
-     *  viewModelA.
-     * }
-     *
-     * Parent become middle man between child and QLRepo
-     * it makes QLRepo much more memory friendly, since it only instantiate once
-     */
     private lateinit var dashboardViewModel: DashboardViewModel
-
     private val tabItems = listOf(
         Pair(R.drawable.ic_home, "Home"),
         Pair(R.drawable.ic_history, "History"),
@@ -69,13 +42,18 @@ class DashboardScreen : AppCompatActivity() {
             QLRetriever.init(this@DashboardScreen, applicationContext, authToken)
         }
 
-        dashboardViewModel = ViewModelFactory().create(DashboardViewModel::class.java)
+        initViewModel()
         initView()
     }
 
+    private fun initViewModel() {
+        dashboardViewModel = ViewModelFactory().create(DashboardViewModel::class.java)
+    }
+
     private fun initView() {
-        vpHome.adapter = PagerAdapter(
-            supportFragmentManager, listOf(
+        vpHome.offscreenPageLimit = 2
+        vpHome.adapter = PagerAdapter(supportFragmentManager,
+            listOf(
                 HomeSection(),
                 LocationListSection(),
                 MonthlyDataSection()
@@ -118,10 +96,11 @@ class DashboardScreen : AppCompatActivity() {
         grantResults: IntArray
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults.any { it ==  PackageManager.PERMISSION_DENIED }) {
-
-        } else {
-
+        if (grantResults.none { it == PackageManager.PERMISSION_DENIED }) {
+            /**
+             * re-init tracking activity since permissions already allowed
+             */
+            dashboardViewModel.initTracking()
         }
     }
 }
