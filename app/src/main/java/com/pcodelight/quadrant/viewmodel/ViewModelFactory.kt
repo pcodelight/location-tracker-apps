@@ -11,12 +11,6 @@ class ViewModelFactory: ViewModelProvider.Factory {
                 return DashboardViewModel() as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->
                 return LoginViewModel(UserRepository()) as T
-            modelClass.isAssignableFrom(HomeSectionViewModel::class.java) ->
-                return HomeSectionViewModel() as T
-            modelClass.isAssignableFrom(LocationListViewModel::class.java) ->
-                return LocationListViewModel() as T
-            modelClass.isAssignableFrom(MonthlyDataViewModel::class.java) ->
-                return MonthlyDataViewModel() as T
         }
 
         throw IllegalArgumentException("Unknown class name")
