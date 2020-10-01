@@ -10,7 +10,7 @@ import com.pcodelight.quadrant.repository.QLocRepository
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class DashboardViewModel(val repo: QLocRepository) : ViewModel() {
+class DashboardViewModel : ViewModel() {
     /**
      * Home Section
      */
@@ -77,9 +77,8 @@ class DashboardViewModel(val repo: QLocRepository) : ViewModel() {
         }
     }
 
-    init {
-        repo.setDataCallback(qlDataListener)
-        initTracking()
+    private var repo: QLocRepository = QLocRepository().apply {
+        setDataCallback(qlDataListener)
     }
 
     fun sendDataToServer() {

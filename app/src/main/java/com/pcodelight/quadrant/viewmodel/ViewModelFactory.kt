@@ -8,15 +8,8 @@ import com.pcodelight.quadrant.repository.UserRepository
 class ViewModelFactory: ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         when {
-            modelClass.isAssignableFrom(DashboardViewModel::class.java) -> {
-                if (hashMapViewModel.containsKey(DashboardViewModel::class.java.toString())) {
-                    return getViewModel(DashboardViewModel::class.java.toString()) as T
-                } else {
-                    val vm = DashboardViewModel(QLocRepository())
-                    addViewModel(DashboardViewModel::class.java.toString(), vm)
-                    return vm as T
-                }
-            }
+            modelClass.isAssignableFrom(DashboardViewModel::class.java) ->
+                return DashboardViewModel() as T
             modelClass.isAssignableFrom(LoginViewModel::class.java) ->
                 return LoginViewModel(UserRepository()) as T
             modelClass.isAssignableFrom(HomeSectionViewModel::class.java) ->
@@ -28,19 +21,5 @@ class ViewModelFactory: ViewModelProvider.Factory {
         }
 
         throw IllegalArgumentException("Unknown class name")
-    }
-
-    companion object {
-        /**
-         * Shared view model
-         */
-        val hashMapViewModel = HashMap<String, ViewModel>()
-
-        fun addViewModel(key: String, viewModel: ViewModel){
-            hashMapViewModel[key] = viewModel
-        }
-        fun getViewModel(key: String): ViewModel? {
-            return hashMapViewModel[key]
-        }
     }
 }

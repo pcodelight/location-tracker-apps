@@ -5,21 +5,21 @@ import com.pcodelight.qlretriever.QLRetriever
 
 class QLocRepository {
     fun setDataCallback(qlDataListener: QuadrantDataListener) {
-        QLRetriever.getInstance().setQuadrantDataListener(qlDataListener)
+        QLRetriever.getInstance()?.setQuadrantDataListener(qlDataListener)
     }
 
     /**
      * to start listening to any location data changes
      */
     fun startTrackingLocationData() {
-        QLRetriever.getInstance().startTracking()
+        QLRetriever.getInstance()?.startTracking()
     }
 
     /**
      * for sending data to server
      */
     suspend fun sendData() {
-        QLRetriever.getInstance().sendLocationData()
+        QLRetriever.getInstance()?.sendLocationData()
     }
 
     /**
@@ -30,10 +30,10 @@ class QLocRepository {
     fun sendDataToKinesis() {}
 
     fun getMonthlyData() {
-        QLRetriever.getInstance().getMonthlyData()
+        QLRetriever.getInstance()?.getMonthlyData()
     }
 
     fun getLocations() {
-        QLRetriever.getInstance().getLocations()
+        QLRetriever.getInstance()?.getLocations()
     }
 }

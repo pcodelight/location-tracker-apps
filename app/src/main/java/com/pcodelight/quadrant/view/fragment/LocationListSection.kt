@@ -1,9 +1,13 @@
 package com.pcodelight.quadrant.view.fragment
 
+import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -21,20 +25,20 @@ class LocationListSection : Fragment(
 ) {
     private val itemAdapter = ItemAdapter<AbstractItem<*>>()
     private val adapter = FastAdapter.with(itemAdapter)
-    private lateinit var viewModel: DashboardViewModel
+    private val viewModel: DashboardViewModel by activityViewModels()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initView()
-
-        viewModel = ViewModelFactory.getViewModel(DashboardViewModel::class.java.toString())
-                as DashboardViewModel
-
         viewModel.apply {
             isListLocationDataLoading.observe(requireActivity(), isLoading)
             locationRequestResult.observe(requireActivity(), locations)
             locationRequestError.observe(requireActivity(), error)
         }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
         viewModel.getLocations()
     }
 
@@ -70,7 +74,7 @@ class LocationListSection : Fragment(
                 LocationListItem(locData)
             })
         } else {
-            itemAdapter.set(listOf(TextItem("No history...")))
+            itemAdapter.set(listOf(TextItem("No history available...")))
         }
     }
 

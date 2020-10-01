@@ -126,7 +126,7 @@ class QLRetriever(
     }
 
     companion object {
-        private lateinit var instance: QLRetriever
+        private var instance: QLRetriever? = null
         fun init(activity: Activity, appContext: Context, authToken: String) {
             instance = QLRetriever(activity, appContext, authToken)
         }
