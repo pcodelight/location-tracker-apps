@@ -1,13 +1,11 @@
 package com.pcodelight.quadrant.view.fragment
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mikepenz.fastadapter.FastAdapter
 import com.mikepenz.fastadapter.adapters.ItemAdapter
@@ -17,7 +15,6 @@ import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.view.ui.LocationListItem
 import com.pcodelight.quadrant.view.ui.TextItem
 import com.pcodelight.quadrant.viewmodel.DashboardViewModel
-import com.pcodelight.quadrant.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.section_list_data.*
 
 class LocationListSection : Fragment(
