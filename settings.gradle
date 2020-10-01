@@ -1,0 +1,2 @@
+include ':app', ':qlretriever'
+rootProject.name='quadrant'

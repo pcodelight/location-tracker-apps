@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">quadrant</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">password</string>
+    <string name="send_location_data">Send Location Data</string>
+    <string name="location_data_fetcher">Location Data Fetcher</string>
+    <string name="fetching_location">Fetching location…</string>
+
+    <string name="id_placeholder">ID: %1$s</string>
+    <string name="lat_placeholder">Latitude: %1$s</string>
+    <string name="long_placeholder">Longitude: %1$s</string>
+    <string name="ip_placeholder">IP Address: %1$s</string>
+    <string name="timestamp_placeholder">Time: %1$s</string>
+    <string name="monthly_location_data_hit">Monthly Location Data Hit</string>
+    <string name="need_permission">Need permission to access location</string>
+</resources>
