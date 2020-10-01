@@ -13,8 +13,10 @@ class API {
 
         val instance: Retrofit
             get() {
-                if (AuthHelper.instance.isHasAuthToken() && AuthHelper.instance.isAuthExpired()) {
-                    AuthHelper.instance.refreshAuthToken()
+                AuthHelper.instance.run {
+                    if (isHasAuthToken() && isAuthExpired()) {
+                        refreshAuthToken()
+                    }
                 }
 
                 val token = AuthHelper.instance.getAuthToken()
@@ -28,7 +30,7 @@ class API {
                         override fun intercept(chain: Interceptor.Chain): Response {
                             val request = chain.request()
                             val authorizedReq = request.newBuilder()
-                                .addHeader("Authorization", "Bearer $token")
+                                .addHeader("Authorization", "$token")
                                 .build()
 
                             return chain.proceed(authorizedReq)
