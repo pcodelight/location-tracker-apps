@@ -6,6 +6,8 @@ import com.mikepenz.fastadapter.items.AbstractItem
 import com.pcodelight.model.LocationData
 import com.pcodelight.quadrant.R
 import kotlinx.android.synthetic.main.ui_location_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
 
 class LocationListItem(val locationData: LocationData) : AbstractItem<LocationListItem.ViewHolder>() {
     override val layoutRes: Int
@@ -21,10 +23,15 @@ class LocationListItem(val locationData: LocationData) : AbstractItem<LocationLi
                 tvIP.text = context.getString(R.string.ip_placeholder, item.locationData.ipAddress)
                 tvLatitude.text = context.getString(R.string.lat_placeholder, item.locationData.latitude.toString())
                 tvLongitude.text = context.getString(R.string.long_placeholder, item.locationData.longitude.toString())
-                tvTimestamp.text = context.getString(R.string.timestamp_placeholder, item.locationData.timestamp)
+                tvTimestamp.text = context.getString(
+                    R.string.timestamp_placeholder,
+                    getFormattedTime(item.locationData.timestamp)
+                )
             }
         }
 
+        private fun getFormattedTime(date: Date) =
+            SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(date)
         override fun unbindView(item: LocationListItem) {}
     }
 }

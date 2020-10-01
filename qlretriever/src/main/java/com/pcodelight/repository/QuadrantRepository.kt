@@ -1,5 +1,6 @@
 package com.pcodelight.repository
 
+import android.util.Log
 import com.API
 import com.pcodelight.listener.QuadrantDataListener
 import com.pcodelight.model.LocationData
@@ -20,8 +21,9 @@ class QuadrantRepository {
         ipAddress: String,
         responseListener: QuadrantDataListener?
     ) {
+        Log.d("QLRetriever", "Now date ${Date()}")
         API.getInstance().create(QuadrantService::class.java)
-            .sendLocation(authToken, latitude, longitude, ipAddress, getCurrentTimeFormatted())
+            .sendLocation(authToken, latitude, longitude, ipAddress, Date().toString())
             .enqueue(object : Callback<LocationData> {
                 override fun onFailure(call: Call<LocationData>, t: Throwable) {
                     responseListener?.onSentLocationError(t.toString())
@@ -83,10 +85,4 @@ class QuadrantRepository {
                 }
             })
     }
-
-    private fun getCurrentTimeFormatted() =
-        SimpleDateFormat(
-            "dd/mm/YYYY hh:mm:ss",
-            Locale.getDefault()
-        ).format(Date())
 }
