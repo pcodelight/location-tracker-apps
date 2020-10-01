@@ -10,6 +10,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.tabs.TabLayout
 import com.pcodelight.qlretriever.QLRetriever
+import com.pcodelight.quadrant.AuthHelper
 import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.view.fragment.HomeSection
 import com.pcodelight.quadrant.view.fragment.LocationListSection
