@@ -14,4 +14,6 @@
     <string name="timestamp_placeholder">Time: %1$s</string>
     <string name="monthly_location_data_hit">Monthly Location Data Hit</string>
     <string name="need_permission">Need permission to access location</string>
+    <string name="no_location">No location available</string>
+    <string name="sent_successfully">Data sent successfully</string>
 </resources>
