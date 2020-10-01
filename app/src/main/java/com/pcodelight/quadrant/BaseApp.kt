@@ -2,7 +2,6 @@ package com.pcodelight.quadrant
 
 import android.app.Application
 import android.content.Context
-import com.pcodelight.joindesign.AuthHelper
 
 class BaseApp: Application() {
     override fun onCreate() {

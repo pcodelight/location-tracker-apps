@@ -7,7 +7,7 @@ import android.text.TextWatcher
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import com.pcodelight.joindesign.AuthHelper
+import com.pcodelight.quadrant.AuthHelper
 import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.viewmodel.LoginViewModel
 import com.pcodelight.quadrant.viewmodel.ViewModelFactory

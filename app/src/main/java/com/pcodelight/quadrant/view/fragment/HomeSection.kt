@@ -8,13 +8,9 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import com.pcodelight.model.LocationData
 import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.viewmodel.DashboardViewModel
-import com.pcodelight.quadrant.viewmodel.ViewModelFactory
-import kotlinx.android.synthetic.main.activity_login_screen.view.*
 import kotlinx.android.synthetic.main.section_home.view.*
 
 class HomeSection : Fragment(

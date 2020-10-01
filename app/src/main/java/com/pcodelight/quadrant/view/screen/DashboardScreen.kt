@@ -2,19 +2,20 @@ package com.pcodelight.quadrant.view.screen
 
 import android.content.Intent
 import android.content.pm.PackageManager
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.google.android.material.tabs.TabLayout
-import com.pcodelight.joindesign.AuthHelper
 import com.pcodelight.qlretriever.QLRetriever
 import com.pcodelight.quadrant.R
-import com.pcodelight.quadrant.view.fragment.*
+import com.pcodelight.quadrant.view.fragment.HomeSection
+import com.pcodelight.quadrant.view.fragment.LocationListSection
+import com.pcodelight.quadrant.view.fragment.MonthlyDataSection
 import com.pcodelight.quadrant.view.ui.TabItem
-import com.pcodelight.quadrant.viewmodel.*
+import com.pcodelight.quadrant.viewmodel.DashboardViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class DashboardScreen : AppCompatActivity() {

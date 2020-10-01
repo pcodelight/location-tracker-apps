@@ -6,11 +6,9 @@ import com.pcodelight.listener.QuadrantDataListener
 import com.pcodelight.model.LocationData
 import com.pcodelight.model.MonthlyData
 import com.pcodelight.service.QuadrantService
-import okhttp3.MultipartBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.text.SimpleDateFormat
 import java.util.*
 
 class QuadrantRepository {

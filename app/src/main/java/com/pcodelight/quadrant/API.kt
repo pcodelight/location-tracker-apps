@@ -1,6 +1,5 @@
 package com.pcodelight.quadrant
 
-import com.pcodelight.joindesign.AuthHelper
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response

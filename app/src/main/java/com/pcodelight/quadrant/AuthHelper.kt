@@ -1,10 +1,8 @@
-package com.pcodelight.joindesign
+package com.pcodelight.quadrant
 
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
-import com.pcodelight.quadrant.BaseApp
-import com.pcodelight.quadrant.Conf
 import com.pcodelight.quadrant.view.screen.LoginScreen
 import java.util.*
 

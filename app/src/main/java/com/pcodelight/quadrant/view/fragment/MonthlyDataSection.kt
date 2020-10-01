@@ -17,7 +17,6 @@ import com.github.mikephil.charting.formatter.ValueFormatter
 import com.pcodelight.model.MonthlyData
 import com.pcodelight.quadrant.R
 import com.pcodelight.quadrant.viewmodel.DashboardViewModel
-import com.pcodelight.quadrant.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.section_insight.*
 import kotlinx.android.synthetic.main.section_insight.view.*
 

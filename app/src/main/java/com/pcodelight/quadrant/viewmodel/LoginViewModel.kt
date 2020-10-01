@@ -1,7 +1,7 @@
 package com.pcodelight.quadrant.viewmodel
 
-import com.pcodelight.joindesign.AuthHelper
 import com.pcodelight.quadrant.ApiCallback
+import com.pcodelight.quadrant.AuthHelper
 import com.pcodelight.quadrant.model.AuthResponse
 import com.pcodelight.quadrant.repository.UserRepository
 

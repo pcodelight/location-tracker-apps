@@ -6,27 +6,15 @@ import android.location.Location
 import android.os.Bundle
 import android.util.Log
 import com.pcodelight.listener.QuadrantDataListener
-import com.pcodelight.model.LocationData
 import com.pcodelight.repository.IpifyRepository
 import com.pcodelight.repository.QuadrantRepository
-import com.pcodelight.service.IpifyService
-import com.pcodelight.service.QuadrantService
 import com.yayandroid.locationmanager.LocationManager
 import com.yayandroid.locationmanager.configuration.DefaultProviderConfiguration
 import com.yayandroid.locationmanager.configuration.GooglePlayServicesConfiguration
 import com.yayandroid.locationmanager.configuration.LocationConfiguration
 import com.yayandroid.locationmanager.configuration.PermissionConfiguration
-import com.yayandroid.locationmanager.constants.FailType
 import com.yayandroid.locationmanager.constants.ProcessType
 import com.yayandroid.locationmanager.listener.LocationListener
-import okhttp3.MultipartBody
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import java.text.SimpleDateFormat
-import java.util.*
 
 class QLRetriever(
     activity: Activity,

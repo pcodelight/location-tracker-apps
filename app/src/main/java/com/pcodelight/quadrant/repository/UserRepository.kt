@@ -4,8 +4,6 @@ import com.pcodelight.quadrant.API
 import com.pcodelight.quadrant.ApiCallback
 import com.pcodelight.quadrant.model.AuthResponse
 import com.pcodelight.quadrant.service.UserService
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

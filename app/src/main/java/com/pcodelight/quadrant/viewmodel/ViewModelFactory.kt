@@ -2,7 +2,6 @@ package com.pcodelight.quadrant.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.pcodelight.quadrant.repository.QLocRepository
 import com.pcodelight.quadrant.repository.UserRepository
 
 class ViewModelFactory: ViewModelProvider.Factory {

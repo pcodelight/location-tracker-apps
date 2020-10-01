@@ -2,10 +2,8 @@ package com.pcodelight.service
 
 import com.pcodelight.model.LocationData
 import com.pcodelight.model.MonthlyData
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
-import java.util.*
 
 interface QuadrantService {
     @FormUrlEncoded
