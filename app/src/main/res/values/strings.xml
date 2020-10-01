@@ -7,9 +7,9 @@
     <string name="location_data_fetcher">Location Data Fetcher</string>
     <string name="fetching_location">Fetching location…</string>
 
-    <string name="id_placeholder">ID: %1$s</string>
-    <string name="lat_placeholder">Latitude: %1$s</string>
-    <string name="long_placeholder">Longitude: %1$s</string>
+    <string name="id_placeholder">ID: %1$d</string>
+    <string name="lat_placeholder">Latitude: %1$f</string>
+    <string name="long_placeholder">Longitude: %1$f</string>
     <string name="ip_placeholder">IP Address: %1$s</string>
     <string name="timestamp_placeholder">Time: %1$s</string>
     <string name="monthly_location_data_hit">Monthly Location Data Hit</string>

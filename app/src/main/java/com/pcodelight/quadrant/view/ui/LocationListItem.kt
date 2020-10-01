@@ -20,9 +20,10 @@ class LocationListItem(val locationData: LocationData) : AbstractItem<LocationLi
     class ViewHolder(val view: View) : FastAdapter.ViewHolder<LocationListItem>(view) {
         override fun bindView(item: LocationListItem, payloads: List<Any>) {
             view.apply {
+                tvId.text = context.getString(R.string.id_placeholder, item.locationData.id)
                 tvIP.text = context.getString(R.string.ip_placeholder, item.locationData.ipAddress)
-                tvLatitude.text = context.getString(R.string.lat_placeholder, item.locationData.latitude.toString())
-                tvLongitude.text = context.getString(R.string.long_placeholder, item.locationData.longitude.toString())
+                tvLatitude.text = context.getString(R.string.lat_placeholder, item.locationData.latitude)
+                tvLongitude.text = context.getString(R.string.long_placeholder, item.locationData.longitude)
                 tvTimestamp.text = context.getString(
                     R.string.timestamp_placeholder,
                     getFormattedTime(item.locationData.timestamp)
