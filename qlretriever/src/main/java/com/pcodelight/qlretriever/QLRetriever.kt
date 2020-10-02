@@ -5,6 +5,10 @@ import android.content.Context
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
+import com.amazonaws.auth.BasicAWSCredentials
+import com.amazonaws.internal.StaticCredentialsProvider
+import com.amazonaws.mobileconnectors.kinesis.kinesisrecorder.KinesisRecorder
+import com.amazonaws.regions.Regions
 import com.pcodelight.listener.QuadrantDataListener
 import com.pcodelight.repository.IpifyRepository
 import com.pcodelight.repository.QuadrantRepository
@@ -15,10 +19,6 @@ import com.yayandroid.locationmanager.configuration.LocationConfiguration
 import com.yayandroid.locationmanager.configuration.PermissionConfiguration
 import com.yayandroid.locationmanager.constants.ProcessType
 import com.yayandroid.locationmanager.listener.LocationListener
-import com.amazonaws.regions.Regions
-
-import com.amazonaws.auth.CognitoCachingCredentialsProvider
-import com.amazonaws.mobileconnectors.kinesis.kinesisrecorder.KinesisRecorder
 
 
 class QLRetriever(
@@ -126,21 +126,27 @@ class QLRetriever(
     }
 
     /**
-     * Using my kinesis server,
      * Actually, i already implemented kinesis at backend service
      * This is just for experimenting
      */
     private val region = Regions.US_EAST_2
-    private val credentialsProvider = CognitoCachingCredentialsProvider(
-        applicationContext,
-        "us-east-2:7577482a-ec16-4a0f-974b-12d74cba0f1c",
-        region
+
+    /**
+     * Seems much safer using cognito,
+     * in the meantime, we could utilize build config to hide
+     * the real value of access_id / secret_key, pass it when build the apk
+     */
+    private val credential = BasicAWSCredentials(
+        BuildConfig.ACCESS_ID,
+        BuildConfig.SECRET_KEY
     )
+
+    private val provider = StaticCredentialsProvider(credential)
 
     private val kinesisRecorder = KinesisRecorder(
         applicationContext.cacheDir,
         region,
-        credentialsProvider
+        provider
     )
 
     init {
@@ -152,7 +158,6 @@ class QLRetriever(
         fun init(activity: Activity, appContext: Context, authToken: String) {
             instance = QLRetriever(activity, appContext, authToken)
         }
-
         fun getInstance() = instance
     }
 }
