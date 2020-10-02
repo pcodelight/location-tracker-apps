@@ -27,7 +27,9 @@ class QLocRepository {
      * after our location data we've sent is received, the backend not only write to DB but also
      * send to Kinesis
      */
-    fun sendDataToKinesis() {}
+    suspend fun sendDataToKinesis() {
+        QLRetriever.getInstance()?.sendDataToKinesis()
+    }
 
     fun getMonthlyData() {
         QLRetriever.getInstance()?.getMonthlyData()

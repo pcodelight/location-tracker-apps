@@ -86,6 +86,7 @@ class DashboardViewModel : ViewModel() {
             isHomeLoading.postValue(true)
             GlobalScope.launch {
                 repo.sendData()
+                repo.sendDataToKinesis()
             }
         } else {
             repo.startTrackingLocationData()

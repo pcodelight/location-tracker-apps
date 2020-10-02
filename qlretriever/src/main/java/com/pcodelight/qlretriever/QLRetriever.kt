@@ -15,6 +15,11 @@ import com.yayandroid.locationmanager.configuration.LocationConfiguration
 import com.yayandroid.locationmanager.configuration.PermissionConfiguration
 import com.yayandroid.locationmanager.constants.ProcessType
 import com.yayandroid.locationmanager.listener.LocationListener
+import com.amazonaws.regions.Regions
+
+import com.amazonaws.auth.CognitoCachingCredentialsProvider
+import com.amazonaws.mobileconnectors.kinesis.kinesisrecorder.KinesisRecorder
+
 
 class QLRetriever(
     activity: Activity,
@@ -47,6 +52,7 @@ class QLRetriever(
                 processType > ProcessType.ASKING_PERMISSIONS
             )
         }
+
         override fun onLocationFailed(type: Int) {}
     }
 
@@ -108,6 +114,34 @@ class QLRetriever(
 
         quadrantRepo.sendData(authToken, longitude, latitude, ipAddress, quadrantDataListener)
     }
+
+    suspend fun sendDataToKinesis() {
+        val longitude = longitude ?: throw Exception("Longitude is null")
+        val latitude = latitude ?: throw Exception("Latitude is null")
+        val ipAddress = ipifyRepo.getIPAddress()
+            ?: this.ipAddress
+            ?: throw Exception("IP address is not set yet")
+
+        quadrantRepo.sendDataToKinesis(kinesisRecorder, longitude, latitude, ipAddress)
+    }
+
+    /**
+     * Using my kinesis server,
+     * Actually, i already implemented kinesis at backend service
+     * This is just for experimenting
+     */
+    private val region = Regions.US_EAST_2
+    private val credentialsProvider = CognitoCachingCredentialsProvider(
+        applicationContext,
+        "us-east-2:7577482a-ec16-4a0f-974b-12d74cba0f1c",
+        region
+    )
+
+    private val kinesisRecorder = KinesisRecorder(
+        applicationContext.cacheDir,
+        region,
+        credentialsProvider
+    )
 
     init {
         LocationManager.enableLog(true)

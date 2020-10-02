@@ -4,7 +4,6 @@ apply plugin: 'kotlin-android-extensions'
 android {
     compileSdkVersion 29
 
-
     defaultConfig {
         minSdkVersion 19
         targetSdkVersion 29
@@ -36,6 +35,8 @@ dependencies {
     implementation 'com.yayandroid:LocationManager:2.4.0'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutine_version"
+    implementation 'com.amazonaws:aws-android-sdk-core:2.19.0'
+    implementation 'com.amazonaws:aws-android-sdk-kinesis:2.19.0'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
