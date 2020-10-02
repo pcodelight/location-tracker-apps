@@ -7,7 +7,8 @@ import com.pcodelight.listener.QuadrantDataListener
 import com.pcodelight.model.LocationData
 import com.pcodelight.model.MonthlyData
 import com.pcodelight.service.QuadrantService
-import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class QuadrantRepository {
-    private val streamName = "newStreamTest007"
+    private val streamName = "sandytest02"
 
     fun sendData(
         authToken: String,
@@ -60,7 +61,7 @@ class QuadrantRepository {
                 accumulate("timestamp", getFormattedDate())
             }
             recorder.saveRecord(json.toString(), streamName)
-            coroutineScope {
+            withContext(Dispatchers.Default) {
                 recorder.submitAllRecords()
             }
         } catch (e: Exception) {

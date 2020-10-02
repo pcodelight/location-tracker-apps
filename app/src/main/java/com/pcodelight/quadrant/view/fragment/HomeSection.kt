@@ -36,27 +36,24 @@ class HomeSection : Fragment(
     }
 
     private val isLoadingDeviceLocation = Observer<Boolean> { isRetrievingLocation ->
+        view?.tvStatus?.text = getString(R.string.fetching_location)
         view?.btnSendData?.isEnabled = isRetrievingLocation.not()
     }
 
     private val onRequestSuccess = Observer<LocationData> {
         if (it != null) {
-            Toast.makeText(
-                requireContext(),
-                getString(R.string.sent_successfully),
-                Toast.LENGTH_SHORT
-            ).show()
+            showMessage(getString(R.string.sent_successfully))
         }
     }
 
     private val onRequestError = Observer<String> {
         if (it.isNotBlank()) {
-            Toast.makeText(
-                requireContext(),
-                it,
-                Toast.LENGTH_SHORT
-            ).show()
+            showMessage(it)
         }
+    }
+
+    private fun showMessage(msg: String) {
+        Toast.makeText(requireContext(), msg, Toast.LENGTH_SHORT).show()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
